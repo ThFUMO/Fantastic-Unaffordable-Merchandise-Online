@@ -9,18 +9,26 @@ namespace THFUMO
     {
         private List<TextMeshProUGUI> childTexts = new();
         private int currentButton = 0;
-        private bool hasPressedArrowKey = true;
+        private bool hasPressedArrowKey = false;
+        [SerializeField]
+        private AudioClip select;
 
-        void Start()
+        private void Start()
         {
             foreach (Transform child in transform)
             {
                 childTexts.Add(child.GetComponent<TextMeshProUGUI>());
             }
+            if (childTexts.Count != 0)
+            {
+                childTexts[0].outlineColor = Color.blue;
+                childTexts[0].outlineWidth = 0.1f;
+                childTexts[0].gameObject.Reactivate();
+            }
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -34,6 +42,7 @@ namespace THFUMO
             }
             if (hasPressedArrowKey && childTexts.Count != 0)
             {
+                AudioManager.PlaySoundEffect(select);
                 currentButton = Utilities.Repeat(currentButton, 0, childTexts.Count - 1);
                 if (childTexts[currentButton] == null)
                 {
@@ -49,7 +58,7 @@ namespace THFUMO
                     childTexts[currentButton].outlineWidth = 0.1f;
                     foreach (TextMeshProUGUI text in childTexts)
                     {
-                        text.gameObject.Restart();
+                        text.gameObject.Reactivate();
                     }
                 }
                 hasPressedArrowKey = false;

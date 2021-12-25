@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace THFUMO
@@ -6,20 +7,30 @@ namespace THFUMO
     {
         public static int Repeat(int value, int min, int max)
         {
-            if (value < min)
-            {
-                return max;
-            }
-            else if (value > max)
+            if (min == max)
             {
                 return min;
+            }
+            if (min > max)
+            {
+                int t = min;
+                min = max;
+                max = t;
+            }
+            if (value > max)
+            {
+                return (value - max - 1) % (max - min + 1) + min;
+            }
+            else if (value < min)
+            {
+                return max - (min - value - 1) % (max - min + 1);
             }
             else
             {
                 return value;
             }
         }
-        public static void Restart(this GameObject gameObject)
+        public static void Reactivate(this GameObject gameObject)
         {
             gameObject.SetActive(false);
             gameObject.SetActive(true);
