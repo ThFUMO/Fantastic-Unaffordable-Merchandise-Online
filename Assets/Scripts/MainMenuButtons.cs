@@ -8,8 +8,11 @@ namespace THFUMO
     public class MainMenuButtons : MonoBehaviour
     {
         private List<TextMeshProUGUI> childTexts = new();
+
         private int currentButton = 0;
+
         private bool hasPressedArrowKey = false;
+
         [SerializeField]
         private AudioClip select;
 
