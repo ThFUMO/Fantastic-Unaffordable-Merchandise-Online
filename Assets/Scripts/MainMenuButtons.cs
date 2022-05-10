@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 namespace THFUMO
 {
@@ -25,6 +26,8 @@ namespace THFUMO
         [SerializeField]
         private float outlineWidth;
 
+        private Inputs inputs;
+
         private void Start()
         {
             foreach (Transform child in transform)
@@ -37,43 +40,48 @@ namespace THFUMO
                 childTexts[0].outlineWidth = outlineWidth;
                 childTexts[0].gameObject.Reactivate();
             }
+            inputs = new();
+            inputs.Enable();
+            inputs.UI.MoveUp.performed += MoveUp;
+            inputs.UI.MoveDown.performed += MoveDown;
         }
 
-        private void Update()
+        private void MoveUp(InputAction.CallbackContext context)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            currentButton--;
+            hasPressedArrowKey = true;
+            UpdateHighlight();
+        }
+
+        private void MoveDown(InputAction.CallbackContext context)
+        {
+            currentButton++;
+            hasPressedArrowKey = true;
+            UpdateHighlight();
+        }
+
+        private void UpdateHighlight()
+        {
+            audioManager.PlaySoundEffect(select);
+            currentButton = Utilities.Repeat(currentButton, 0, childTexts.Count - 1);
+            if (childTexts[currentButton] == null)
             {
-                currentButton--;
-                hasPressedArrowKey = true;
+                Debug.LogWarning($"{childTexts[currentButton].gameObject.name} has no {nameof(TextMeshProUGUI)} attached.");
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            else
             {
-                currentButton++;
-                hasPressedArrowKey = true;
-            }
-            if (hasPressedArrowKey && childTexts.Count != 0)
-            {
-                audioManager.PlaySoundEffect(select);
-                currentButton = Utilities.Repeat(currentButton, 0, childTexts.Count - 1);
-                if (childTexts[currentButton] == null)
+                childTexts[currentButton].outlineColor = outlineColor;
+                foreach (TextMeshProUGUI text in childTexts)
                 {
-                    Debug.LogWarning($"{childTexts[currentButton].gameObject.name} has no {nameof(TextMeshProUGUI)} attached.");
+                    text.outlineWidth = 0;
                 }
-                else
+                childTexts[currentButton].outlineWidth = outlineWidth;
+                foreach (TextMeshProUGUI text in childTexts)
                 {
-                    childTexts[currentButton].outlineColor = outlineColor;
-                    foreach (TextMeshProUGUI text in childTexts)
-                    {
-                        text.outlineWidth = 0;
-                    }
-                    childTexts[currentButton].outlineWidth = outlineWidth;
-                    foreach (TextMeshProUGUI text in childTexts)
-                    {
-                        text.gameObject.Reactivate();
-                    }
+                    text.gameObject.Reactivate();
                 }
-                hasPressedArrowKey = false;
             }
+            hasPressedArrowKey = false;
         }
     }
 }
