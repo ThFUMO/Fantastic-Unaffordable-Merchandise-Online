@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace THFUMO
 {
-    public class AudioManager : MonoBehaviour, IAudioManager
+    public class AudioManager : AudioManagerBase
     {
         private static AudioSource music;
 
@@ -16,12 +16,12 @@ namespace THFUMO
             soundEffect = gameObject.AddComponent<AudioSource>();
         }
 
-        public void PlayMusic(AudioClip audioClip, float volume = 1)
+        public override void PlayMusic(AudioClip audioClip, float volume = 1)
         {
             music.PlayOneShot(audioClip, volume);
         }
 
-        public void PlaySoundEffect(AudioClip audioClip, float volume = 1)
+        public override void PlaySoundEffect(AudioClip audioClip, float volume = 1)
         {
             soundEffect.PlayOneShot(audioClip, volume);
         }

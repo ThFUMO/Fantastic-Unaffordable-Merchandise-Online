@@ -16,17 +16,7 @@ namespace THFUMO
         [SerializeField]
         private AudioClip select;
 
-        public MonoBehaviour AudioManager;
-
-        private IAudioManager audioManager;
-
-        private void OnValidate()
-        {
-            if (AudioManager is not IAudioManager)
-            {
-                Debug.LogError($"The {nameof(AudioManager)} field on {nameof(MainMenuButtons)} attatched to {gameObject.name} is not an instance of {nameof(IAudioManager)}");
-            }
-        }
+        public AudioManagerBase AudioManager;
 
         private void Start()
         {
@@ -39,14 +29,6 @@ namespace THFUMO
                 childTexts[0].outlineColor = Color.blue;
                 childTexts[0].outlineWidth = 0.1f;
                 childTexts[0].gameObject.Reactivate();
-            }
-            if (AudioManager is IAudioManager manager)
-            {
-                audioManager = manager;
-            }
-            else
-            {
-                Debug.LogError($"The {nameof(AudioManager)} field on {nameof(MainMenuButtons)} attatched to {gameObject.name} is not an instance of {nameof(IAudioManager)}");
             }
         }
 
@@ -65,7 +47,7 @@ namespace THFUMO
             }
             if (hasPressedArrowKey && childTexts.Count != 0)
             {
-                audioManager.PlaySoundEffect(select);
+                AudioManager.PlaySoundEffect(select);
                 currentButton = Utilities.Repeat(currentButton, 0, childTexts.Count - 1);
                 if (childTexts[currentButton] == null)
                 {
