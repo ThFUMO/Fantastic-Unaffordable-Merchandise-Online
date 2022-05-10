@@ -16,6 +16,8 @@ namespace THFUMO
         [SerializeField]
         private AudioClip select;
 
+        public AudioManagerBase AudioManager;
+
         private void Start()
         {
             foreach (Transform child in transform)
