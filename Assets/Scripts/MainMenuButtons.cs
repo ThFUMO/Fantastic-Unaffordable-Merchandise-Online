@@ -16,7 +16,14 @@ namespace THFUMO
         [SerializeField]
         private AudioClip select;
 
-        public AudioManagerBase AudioManager;
+        [SerializeField]
+        private AudioManagerBase audioManager;
+
+        [SerializeField]
+        private Color outlineColor;
+
+        [SerializeField]
+        private float outlineWidth;
 
         private void Start()
         {
@@ -26,13 +33,12 @@ namespace THFUMO
             }
             if (childTexts.Count != 0)
             {
-                childTexts[0].outlineColor = Color.blue;
-                childTexts[0].outlineWidth = 0.1f;
+                childTexts[0].outlineColor = outlineColor;
+                childTexts[0].outlineWidth = outlineWidth;
                 childTexts[0].gameObject.Reactivate();
             }
         }
 
-        // Update is called once per frame
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -47,7 +53,7 @@ namespace THFUMO
             }
             if (hasPressedArrowKey && childTexts.Count != 0)
             {
-                AudioManager.PlaySoundEffect(select);
+                audioManager.PlaySoundEffect(select);
                 currentButton = Utilities.Repeat(currentButton, 0, childTexts.Count - 1);
                 if (childTexts[currentButton] == null)
                 {
@@ -55,12 +61,12 @@ namespace THFUMO
                 }
                 else
                 {
-                    childTexts[currentButton].outlineColor = Color.blue;
+                    childTexts[currentButton].outlineColor = outlineColor;
                     foreach (TextMeshProUGUI text in childTexts)
                     {
                         text.outlineWidth = 0;
                     }
-                    childTexts[currentButton].outlineWidth = 0.1f;
+                    childTexts[currentButton].outlineWidth = outlineWidth;
                     foreach (TextMeshProUGUI text in childTexts)
                     {
                         text.gameObject.Reactivate();

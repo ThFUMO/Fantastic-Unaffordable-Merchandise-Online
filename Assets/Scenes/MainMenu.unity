@@ -968,7 +968,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   select: {fileID: 8300000, guid: 7ebd8fcca5972dc43968932087e0ddee, type: 3}
-  AudioManager: {fileID: 595351619}
+  audioManager: {fileID: 595351619}
+  outlineColor: {r: 0, g: 0.25, b: 1, a: 1}
+  outlineWidth: 0.3
 --- !u!1 &1817274199
 GameObject:
   m_ObjectHideFlags: 0
