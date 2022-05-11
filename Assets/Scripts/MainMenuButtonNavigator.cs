@@ -9,12 +9,28 @@ namespace THFUMO
     {
         private List<TextMeshProUGUI> childTexts = new();
 
-        public override int CurrentButton { get; set; } = 0;
+        private int currentButton = 0;
+
+        public override int CurrentButton
+        {
+            get => currentButton;
+            set
+            {
+                currentButton = value;
+                currentButton = Utilities.Repeat(currentButton, 0, childTexts.Count - 1);
+                UpdateHighlight();
+            }
+        }
+
+        public override int ButtonCount
+        {
+            get => childTexts.Count;
+        }
 
         private bool hasPressedArrowKey = false;
 
         [SerializeField]
-        private AudioClip select;
+        private AudioClip selectionSoundEffect;
 
         [SerializeField]
         private AudioManagerBase audioManager;
@@ -41,28 +57,28 @@ namespace THFUMO
             }
             controls = new();
             controls.Enable();
-            controls.UI.MoveUp.performed += MoveUp;
-            controls.UI.MoveDown.performed += MoveDown;
+            controls.UI.MoveUp.performed += MoveUp_performed;
+            controls.UI.MoveDown.performed += MoveDown_performed;
         }
 
-        private void MoveUp(InputAction.CallbackContext context)
+        private void MoveUp_performed(InputAction.CallbackContext context)
         {
             CurrentButton--;
             hasPressedArrowKey = true;
+            audioManager.PlaySoundEffect(selectionSoundEffect);
             UpdateHighlight();
         }
 
-        private void MoveDown(InputAction.CallbackContext context)
+        private void MoveDown_performed(InputAction.CallbackContext context)
         {
             CurrentButton++;
             hasPressedArrowKey = true;
+            audioManager.PlaySoundEffect(selectionSoundEffect);
             UpdateHighlight();
         }
 
         private void UpdateHighlight()
         {
-            audioManager.PlaySoundEffect(select);
-            CurrentButton = Utilities.Repeat(CurrentButton, 0, childTexts.Count - 1);
             if (childTexts[CurrentButton] == null)
             {
                 Debug.LogWarning($"{childTexts[CurrentButton].gameObject.name} has no {nameof(TextMeshProUGUI)} attached.");
