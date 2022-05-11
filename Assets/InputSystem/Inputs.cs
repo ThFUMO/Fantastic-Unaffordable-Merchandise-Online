@@ -64,6 +64,24 @@ namespace THFUMO
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""0772c2a0-9fbe-45dc-a72f-c08f24c43e44"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""9dacb315-ca82-4e14-9602-e32573959b2d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +128,39 @@ namespace THFUMO
                     ""action"": ""MoveRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""789eaa21-4d98-4fad-8a35-cbf097068a03"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""801c90cd-1e8c-4951-9681-8ea2dac204e5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84910c31-5b5e-4826-9308-d0f820cdfc20"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -134,6 +185,8 @@ namespace THFUMO
             m_UI_MoveLeft = m_UI.FindAction("MoveLeft", throwIfNotFound: true);
             m_UI_MoveDown = m_UI.FindAction("MoveDown", throwIfNotFound: true);
             m_UI_MoveRight = m_UI.FindAction("MoveRight", throwIfNotFound: true);
+            m_UI_Confirm = m_UI.FindAction("Confirm", throwIfNotFound: true);
+            m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -197,6 +250,8 @@ namespace THFUMO
         private readonly InputAction m_UI_MoveLeft;
         private readonly InputAction m_UI_MoveDown;
         private readonly InputAction m_UI_MoveRight;
+        private readonly InputAction m_UI_Confirm;
+        private readonly InputAction m_UI_Cancel;
         public struct UIActions
         {
             private @Inputs m_Wrapper;
@@ -205,6 +260,8 @@ namespace THFUMO
             public InputAction @MoveLeft => m_Wrapper.m_UI_MoveLeft;
             public InputAction @MoveDown => m_Wrapper.m_UI_MoveDown;
             public InputAction @MoveRight => m_Wrapper.m_UI_MoveRight;
+            public InputAction @Confirm => m_Wrapper.m_UI_Confirm;
+            public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -226,6 +283,12 @@ namespace THFUMO
                     @MoveRight.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMoveRight;
                     @MoveRight.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMoveRight;
                     @MoveRight.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMoveRight;
+                    @Confirm.started -= m_Wrapper.m_UIActionsCallbackInterface.OnConfirm;
+                    @Confirm.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnConfirm;
+                    @Confirm.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnConfirm;
+                    @Cancel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                    @Cancel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                    @Cancel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -242,6 +305,12 @@ namespace THFUMO
                     @MoveRight.started += instance.OnMoveRight;
                     @MoveRight.performed += instance.OnMoveRight;
                     @MoveRight.canceled += instance.OnMoveRight;
+                    @Confirm.started += instance.OnConfirm;
+                    @Confirm.performed += instance.OnConfirm;
+                    @Confirm.canceled += instance.OnConfirm;
+                    @Cancel.started += instance.OnCancel;
+                    @Cancel.performed += instance.OnCancel;
+                    @Cancel.canceled += instance.OnCancel;
                 }
             }
         }
@@ -261,6 +330,8 @@ namespace THFUMO
             void OnMoveLeft(InputAction.CallbackContext context);
             void OnMoveDown(InputAction.CallbackContext context);
             void OnMoveRight(InputAction.CallbackContext context);
+            void OnConfirm(InputAction.CallbackContext context);
+            void OnCancel(InputAction.CallbackContext context);
         }
     }
 }
