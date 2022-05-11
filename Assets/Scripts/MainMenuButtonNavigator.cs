@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -6,11 +5,11 @@ using UnityEngine.InputSystem;
 
 namespace THFUMO
 {
-    public class MainMenuButtons : MonoBehaviour
+    public class MainMenuButtonNavigator : MonoBehaviour
     {
         private List<TextMeshProUGUI> childTexts = new();
 
-        private int currentButton = 0;
+        public int CurrentButton { get; set; } = 0;
 
         private bool hasPressedArrowKey = false;
 
@@ -48,14 +47,14 @@ namespace THFUMO
 
         private void MoveUp(InputAction.CallbackContext context)
         {
-            currentButton--;
+            CurrentButton--;
             hasPressedArrowKey = true;
             UpdateHighlight();
         }
 
         private void MoveDown(InputAction.CallbackContext context)
         {
-            currentButton++;
+            CurrentButton++;
             hasPressedArrowKey = true;
             UpdateHighlight();
         }
@@ -63,19 +62,19 @@ namespace THFUMO
         private void UpdateHighlight()
         {
             audioManager.PlaySoundEffect(select);
-            currentButton = Utilities.Repeat(currentButton, 0, childTexts.Count - 1);
-            if (childTexts[currentButton] == null)
+            CurrentButton = Utilities.Repeat(CurrentButton, 0, childTexts.Count - 1);
+            if (childTexts[CurrentButton] == null)
             {
-                Debug.LogWarning($"{childTexts[currentButton].gameObject.name} has no {nameof(TextMeshProUGUI)} attached.");
+                Debug.LogWarning($"{childTexts[CurrentButton].gameObject.name} has no {nameof(TextMeshProUGUI)} attached.");
             }
             else
             {
-                childTexts[currentButton].outlineColor = outlineColor;
+                childTexts[CurrentButton].outlineColor = outlineColor;
                 foreach (TextMeshProUGUI text in childTexts)
                 {
                     text.outlineWidth = 0;
                 }
-                childTexts[currentButton].outlineWidth = outlineWidth;
+                childTexts[CurrentButton].outlineWidth = outlineWidth;
                 foreach (TextMeshProUGUI text in childTexts)
                 {
                     text.gameObject.Reactivate();
