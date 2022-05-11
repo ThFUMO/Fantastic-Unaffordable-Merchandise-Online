@@ -25,7 +25,7 @@ namespace THFUMO
         [SerializeField]
         private float outlineWidth;
 
-        private Inputs inputs;
+        private Controls controls;
 
         private void Start()
         {
@@ -39,10 +39,10 @@ namespace THFUMO
                 childTexts[0].outlineWidth = outlineWidth;
                 childTexts[0].gameObject.Reactivate();
             }
-            inputs = new();
-            inputs.Enable();
-            inputs.UI.MoveUp.performed += MoveUp;
-            inputs.UI.MoveDown.performed += MoveDown;
+            controls = new();
+            controls.Enable();
+            controls.UI.MoveUp.performed += MoveUp;
+            controls.UI.MoveDown.performed += MoveDown;
         }
 
         private void MoveUp(InputAction.CallbackContext context)
