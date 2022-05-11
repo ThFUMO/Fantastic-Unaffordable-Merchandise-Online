@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using UnityEngine;
 
 namespace THFUMO
@@ -30,10 +30,24 @@ namespace THFUMO
                 return value;
             }
         }
+
         public static void Reactivate(this GameObject gameObject)
         {
             gameObject.SetActive(false);
             gameObject.SetActive(true);
+        }
+
+        public static IEnumerator TranslateSmoothly(this Transform transform, Vector3 start, Vector3 end, float speed)
+        {
+            transform.position = start;
+            float distance = Vector3.Distance(start, end);
+            Vector3 direction = (end - start).normalized;
+            while (Vector3.Distance(transform.position, start) < distance)
+            {
+                transform.position += speed * Time.deltaTime * direction;
+                yield return null;
+            }
+            transform.position = end;
         }
     }
 }

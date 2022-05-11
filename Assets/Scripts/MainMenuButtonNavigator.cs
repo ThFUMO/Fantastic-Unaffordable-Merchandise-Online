@@ -63,6 +63,10 @@ namespace THFUMO
 
         private void MoveUp_performed(InputAction.CallbackContext context)
         {
+            if (!gameObject.activeInHierarchy)
+            {
+                return;
+            }
             CurrentButton--;
             hasPressedArrowKey = true;
             audioManager.PlaySoundEffect(selectionSoundEffect);
@@ -71,6 +75,10 @@ namespace THFUMO
 
         private void MoveDown_performed(InputAction.CallbackContext context)
         {
+            if (!gameObject.activeInHierarchy)
+            {
+                return;
+            }
             CurrentButton++;
             hasPressedArrowKey = true;
             audioManager.PlaySoundEffect(selectionSoundEffect);

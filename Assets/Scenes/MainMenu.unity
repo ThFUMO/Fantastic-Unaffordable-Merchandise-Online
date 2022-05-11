@@ -945,7 +945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1024358863
 RectTransform:
   m_ObjectHideFlags: 0
@@ -967,6 +967,50 @@ RectTransform:
   m_AnchoredPosition: {x: -0.00012207, y: 0}
   m_SizeDelta: {x: 3840, y: 2160}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1256532865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256532867}
+  - component: {fileID: 1256532866}
+  m_Layer: 0
+  m_Name: CoroutineRunner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1256532866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256532865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b97c641a7499274dbf0308f66fb05c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1256532867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256532865}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1258660675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,6 +1516,9 @@ MonoBehaviour:
   confirmationSoundEffect: {fileID: 8300000, guid: bfa9dd7afa434f04f8fb0424077df8b0, type: 3}
   cancellationSoundEffect: {fileID: 8300000, guid: 995109f706d6bbd489f32a0dddc73e0e, type: 3}
   audioManager: {fileID: 595351619}
+  optionsMenu: {fileID: 1024358862}
+  optionsMenuPopInSpeed: 50000
+  coroutineRunner: {fileID: 1256532866}
 --- !u!1 &1547307821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,14 +1530,13 @@ GameObject:
   - component: {fileID: 1547307822}
   - component: {fileID: 1547307825}
   - component: {fileID: 1547307824}
-  - component: {fileID: 1547307823}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1547307822
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1515,22 +1561,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.00012207, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1547307823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547307821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f125de7a0aaf194faed892425e8529e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonNavigator: {fileID: 1547307824}
-  confirmationSoundEffect: {fileID: 0}
-  cancellationSoundEffect: {fileID: 0}
-  audioManager: {fileID: 0}
 --- !u!114 &1547307824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1543,7 +1573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d45ba016f3d0944dbd793e52729bd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionSoundEffect: {fileID: 0}
+  selectionSoundEffect: {fileID: 8300000, guid: 7ebd8fcca5972dc43968932087e0ddee, type: 3}
   audioManager: {fileID: 595351619}
   outlineColor: {r: 0, g: 0.25, b: 1, a: 1}
   outlineWidth: 0.3
