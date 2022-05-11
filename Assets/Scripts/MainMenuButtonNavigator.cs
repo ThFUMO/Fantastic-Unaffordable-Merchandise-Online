@@ -5,11 +5,11 @@ using UnityEngine.InputSystem;
 
 namespace THFUMO
 {
-    public class MainMenuButtonNavigator : MonoBehaviour
+    public class MainMenuButtonNavigator : ButtonNavigatorBase
     {
         private List<TextMeshProUGUI> childTexts = new();
 
-        public int CurrentButton { get; set; } = 0;
+        public override int CurrentButton { get; set; } = 0;
 
         private bool hasPressedArrowKey = false;
 
