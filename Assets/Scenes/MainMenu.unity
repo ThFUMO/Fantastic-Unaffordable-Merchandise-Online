@@ -580,6 +580,7 @@ GameObject:
   - component: {fileID: 530794355}
   - component: {fileID: 530794357}
   - component: {fileID: 530794356}
+  - component: {fileID: 530794358}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -645,6 +646,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530794354}
   m_CullTransparentMesh: 1
+--- !u!114 &530794358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530794354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5ac459a3301a646a3589a4b4034019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cirnoBackground: {fileID: 21300000, guid: 16151d29d27cb5649b21238dad173ca4, type: 3}
+  youmuBackground: {fileID: 21300000, guid: 2569863371e7a1c42b1ef8c6f579f493, type: 3}
 --- !u!1 &595351616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1532,8 @@ MonoBehaviour:
   cancellationSoundEffect: {fileID: 8300000, guid: 995109f706d6bbd489f32a0dddc73e0e, type: 3}
   audioManager: {fileID: 595351619}
   optionsMenu: {fileID: 1024358862}
+  background: {fileID: 530794354}
+  logo: {fileID: 153983070}
   optionsMenuPopInSpeed: 50000
   coroutineRunner: {fileID: 1256532866}
 --- !u!1 &1547307821

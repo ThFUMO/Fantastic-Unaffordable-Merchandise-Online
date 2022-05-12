@@ -42,12 +42,20 @@ namespace THFUMO
             transform.position = start;
             float distance = Vector3.Distance(start, end);
             Vector3 direction = (end - start).normalized;
-            while (Vector3.Distance(transform.position, start) < distance)
+            while (true)
             {
-                transform.position += speed * Time.deltaTime * direction;
-                yield return null;
+                Vector3 nextPos = transform.position + speed * Time.deltaTime * direction;
+                if (Vector3.Distance(nextPos, start) < distance)
+                {
+                    transform.position = nextPos;
+                    yield return null;
+                }
+                else
+                {
+                    transform.position = end;
+                    yield break;
+                }
             }
-            transform.position = end;
         }
     }
 }
