@@ -3,6 +3,9 @@
     public enum AssetKey
     {
         CirnoBackground,
-        YoumuBackground
+        YoumuBackground,
+        UISelectionSoundEffect,
+        UIConfirmationSoundEffect,
+        UICancelSoundEffect
     }
 }

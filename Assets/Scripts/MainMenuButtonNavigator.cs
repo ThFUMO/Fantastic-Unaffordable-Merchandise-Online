@@ -29,11 +29,13 @@ namespace THFUMO
 
         private bool hasPressedArrowKey = false;
 
-        [SerializeField]
         private AudioClip selectionSoundEffect;
 
         [SerializeField]
         private AudioManagerBase audioManager;
+
+        [SerializeField]
+        private AssetHolder<AssetKey, AudioClip> audioHolder;
 
         [SerializeField]
         private Color outlineColor;
@@ -59,6 +61,7 @@ namespace THFUMO
             controls.Enable();
             controls.UI.MoveUp.performed += MoveUp_performed;
             controls.UI.MoveDown.performed += MoveDown_performed;
+            selectionSoundEffect = audioHolder.GetAsset(AssetKey.UISelectionSoundEffect);
         }
 
         private void MoveUp_performed(InputAction.CallbackContext context)

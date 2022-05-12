@@ -670,6 +670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 595351618}
   - component: {fileID: 595351619}
+  - component: {fileID: 595351620}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -704,6 +705,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d37f0dc723087e40b8be0deec13e1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &595351620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595351616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbea07e3446758b41a389654ee5ea73b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionSoundEffect: {fileID: 8300000, guid: 7ebd8fcca5972dc43968932087e0ddee, type: 3}
+  confirmationSoundEffect: {fileID: 8300000, guid: bfa9dd7afa434f04f8fb0424077df8b0, type: 3}
+  cancellationSoundEffect: {fileID: 8300000, guid: 995109f706d6bbd489f32a0dddc73e0e, type: 3}
 --- !u!1 &710268956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,8 +1527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d45ba016f3d0944dbd793e52729bd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionSoundEffect: {fileID: 8300000, guid: 7ebd8fcca5972dc43968932087e0ddee, type: 3}
   audioManager: {fileID: 595351619}
+  audioHolder: {fileID: 595351620}
   outlineColor: {r: 0, g: 0.25, b: 1, a: 1}
   outlineWidth: 0.3
 --- !u!114 &1408669594
@@ -1528,11 +1544,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonNavigator: {fileID: 1408669593}
-  confirmationSoundEffect: {fileID: 8300000, guid: bfa9dd7afa434f04f8fb0424077df8b0, type: 3}
-  cancellationSoundEffect: {fileID: 8300000, guid: 995109f706d6bbd489f32a0dddc73e0e, type: 3}
   audioManager: {fileID: 595351619}
+  audioHolder: {fileID: 595351620}
   optionsMenu: {fileID: 1024358862}
   background: {fileID: 530794354}
+  backgroundImage: {fileID: 530794356}
+  backgroundImageHolder: {fileID: 530794358}
   logo: {fileID: 153983070}
   optionsMenuPopInSpeed: 50000
   coroutineRunner: {fileID: 1256532866}
@@ -1590,8 +1607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d45ba016f3d0944dbd793e52729bd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionSoundEffect: {fileID: 8300000, guid: 7ebd8fcca5972dc43968932087e0ddee, type: 3}
   audioManager: {fileID: 595351619}
+  audioHolder: {fileID: 595351620}
   outlineColor: {r: 0, g: 0.25, b: 1, a: 1}
   outlineWidth: 0.3
 --- !u!114 &1547307825

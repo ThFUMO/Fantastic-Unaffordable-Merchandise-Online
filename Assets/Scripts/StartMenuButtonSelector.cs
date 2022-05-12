@@ -11,23 +11,26 @@ namespace THFUMO
 
         private Controls controls;
 
-        [SerializeField]
         private AudioClip confirmationSoundEffect;
 
-        [SerializeField]
         private AudioClip cancellationSoundEffect;
 
         [SerializeField]
         private AudioManagerBase audioManager;
 
         [SerializeField]
+        private AssetHolder<AssetKey, AudioClip> audioHolder;
+
+        [SerializeField]
         private GameObject optionsMenu;
 
         [SerializeField]
         private GameObject background;
-
+        
+        [SerializeField]
         private Image backgroundImage;
 
+        [SerializeField]
         private AssetHolder<AssetKey, Sprite> backgroundImageHolder;
 
         [SerializeField]
@@ -48,16 +51,8 @@ namespace THFUMO
             controls.UI.Confirm.performed += Confirm_performed;
             controls.UI.Cancel.performed += Cancel_performed;
             optionsMenuRect = optionsMenu.GetComponent<RectTransform>();
-            backgroundImage = background.GetComponent<Image>();
-            if (backgroundImage == null)
-            {
-                Debug.LogError($"{background.name} does not have a {backgroundImage.GetType()} attached.");
-            }
-            backgroundImageHolder = background.GetComponent<AssetHolder<AssetKey, Sprite>>();
-            if (backgroundImageHolder == null)
-            {
-                Debug.LogError($"{background.name} does not have a {backgroundImageHolder.GetType()} attached.");
-            }
+            confirmationSoundEffect = audioHolder.GetAsset(AssetKey.UIConfirmationSoundEffect);
+            cancellationSoundEffect = audioHolder.GetAsset(AssetKey.UICancelSoundEffect);
         }
 
         private void Confirm_performed(InputAction.CallbackContext context)
