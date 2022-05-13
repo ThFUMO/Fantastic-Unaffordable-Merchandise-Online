@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -56,6 +57,39 @@ namespace THFUMO
                     yield break;
                 }
             }
+        }
+
+        public static IEnumerator TranslateSmoothly(Action<float> setter, float start, float end, float speed)
+        {
+            float value = start;
+            setter(value);
+            float distance = Mathf.Abs(start - end);
+            float direction = Mathf.Sign(end - start);
+            while (true)
+            {
+                float nextValue = value + direction * speed * Time.deltaTime;
+                if (Mathf.Abs(nextValue - start) < distance)
+                {
+                    value = nextValue;
+                    setter(value);
+                    yield return null;
+                }
+                else
+                {
+                    value = end;
+                    setter(value);
+                    yield break;
+                }
+            }
+        }
+
+        public static IEnumerator CombineCoroutines(params IEnumerator[] coroutines)
+        {
+            foreach (IEnumerator coroutine in coroutines)
+            {
+                yield return coroutine;
+            }
+            yield break;
         }
     }
 }
