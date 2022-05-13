@@ -62,9 +62,9 @@ namespace THFUMO
                 return;
             }
             audioManager.PlaySoundEffect(confirmationSoundEffect);
-            switch (buttonNavigator.CurrentButton)
+            switch (buttonNavigator.CurrentButtonId)
             {
-                case 1:
+                case ButtonId.MainMenuOptions:
                     optionsMenu.SetActive(true);
                     Vector3 originalPos = optionsMenuRect.position;
                     optionsMenuRect.position = new(optionsMenuRect.position.x - optionsMenuRect.rect.width, optionsMenuRect.position.y, optionsMenuRect.position.z);
@@ -83,7 +83,7 @@ namespace THFUMO
                 return;
             }
             audioManager.PlaySoundEffect(cancellationSoundEffect);
-            buttonNavigator.CurrentButton = buttonNavigator.ButtonCount - 1;
+            buttonNavigator.CurrentButtonIndex = buttonNavigator.ButtonCount - 1;
         }
     }
 }

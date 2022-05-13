@@ -9,16 +9,44 @@ namespace THFUMO
     {
         private List<TextMeshProUGUI> childTexts = new();
 
-        private int currentButton = 0;
+        private int currentButtonIndex = 0;
 
-        public override int CurrentButton
+        public override int CurrentButtonIndex
         {
-            get => currentButton;
+            get => currentButtonIndex;
             set
             {
-                currentButton = value;
-                currentButton = Utilities.Repeat(currentButton, 0, childTexts.Count - 1);
+                currentButtonIndex = value;
+                currentButtonIndex = Utilities.Repeat(currentButtonIndex, 0, childTexts.Count - 1);
                 UpdateHighlight();
+            }
+        }
+
+        public override ButtonId CurrentButtonId
+        {
+            get
+            {
+                ButtonIdHolder buttonIdHolder = childTexts[CurrentButtonIndex].gameObject.GetComponent<ButtonIdHolder>();
+                if (buttonIdHolder == null)
+                {
+                    Debug.LogError($"{childTexts[CurrentButtonIndex].gameObject.name} has no {nameof(ButtonIdHolder)} attached.");
+                    return ButtonId.None;
+                }
+                return childTexts[CurrentButtonIndex].gameObject.GetComponent<ButtonIdHolder>().ButtonId;
+            }
+            set
+            {
+                for (int i = 0; i < childTexts.Count; i++)
+                {
+                    ButtonIdHolder buttonIdHolder = childTexts[i].gameObject.GetComponent<ButtonIdHolder>();
+                    if (buttonIdHolder != null && buttonIdHolder.ButtonId == value)
+                    {
+                        CurrentButtonIndex = i;
+                        UpdateHighlight();
+                        return;
+                    }
+                }
+                Debug.LogError($"No child button with the {nameof(ButtonId)} of {value} is found.");
             }
         }
 
@@ -70,7 +98,7 @@ namespace THFUMO
             {
                 return;
             }
-            CurrentButton--;
+            CurrentButtonIndex--;
             hasPressedArrowKey = true;
             audioManager.PlaySoundEffect(selectionSoundEffect);
             UpdateHighlight();
@@ -82,7 +110,7 @@ namespace THFUMO
             {
                 return;
             }
-            CurrentButton++;
+            CurrentButtonIndex++;
             hasPressedArrowKey = true;
             audioManager.PlaySoundEffect(selectionSoundEffect);
             UpdateHighlight();
@@ -90,18 +118,18 @@ namespace THFUMO
 
         private void UpdateHighlight()
         {
-            if (childTexts[CurrentButton] == null)
+            if (childTexts[CurrentButtonIndex] == null)
             {
-                Debug.LogWarning($"{childTexts[CurrentButton].gameObject.name} has no {nameof(TextMeshProUGUI)} attached.");
+                Debug.LogError($"{childTexts[CurrentButtonIndex].gameObject.name} has no {nameof(TextMeshProUGUI)} attached.");
             }
             else
             {
-                childTexts[CurrentButton].outlineColor = outlineColor;
+                childTexts[CurrentButtonIndex].outlineColor = outlineColor;
                 foreach (TextMeshProUGUI text in childTexts)
                 {
                     text.outlineWidth = 0;
                 }
-                childTexts[CurrentButton].outlineWidth = outlineWidth;
+                childTexts[CurrentButtonIndex].outlineWidth = outlineWidth;
                 foreach (TextMeshProUGUI text in childTexts)
                 {
                     text.gameObject.Reactivate();

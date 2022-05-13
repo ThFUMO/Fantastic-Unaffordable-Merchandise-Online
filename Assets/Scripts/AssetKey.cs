@@ -2,6 +2,7 @@
 {
     public enum AssetKey
     {
+        None,
         CirnoBackground,
         YoumuBackground,
         UISelectionSoundEffect,
