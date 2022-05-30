@@ -32,7 +32,7 @@ namespace THFUMO
                     Debug.LogError($"{childTexts[CurrentButtonIndex].gameObject.name} has no {nameof(ButtonIdHolder)} attached.");
                     return ButtonId.None;
                 }
-                return childTexts[CurrentButtonIndex].gameObject.GetComponent<ButtonIdHolder>().ButtonId;
+                return buttonIdHolder.ButtonId;
             }
             set
             {
@@ -139,4 +139,3 @@ namespace THFUMO
         }
     }
 }
-

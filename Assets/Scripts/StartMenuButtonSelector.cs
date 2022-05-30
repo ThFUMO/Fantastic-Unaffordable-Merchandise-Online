@@ -61,10 +61,10 @@ namespace THFUMO
             {
                 return;
             }
-            audioManager.PlaySoundEffect(confirmationSoundEffect);
             switch (buttonNavigator.CurrentButtonId)
             {
                 case ButtonId.MainMenuOptions:
+                    audioManager.PlaySoundEffect(confirmationSoundEffect);
                     optionsMenu.SetActive(true);
                     Vector3 originalPos = optionsMenuRect.position;
                     optionsMenuRect.position = new(optionsMenuRect.position.x - optionsMenuRect.rect.width, optionsMenuRect.position.y, optionsMenuRect.position.z);
@@ -72,6 +72,10 @@ namespace THFUMO
                     coroutineRunner.StartCoroutine(optionsMenuRect.TranslateSmoothly(optionsMenuRect.position, originalPos, optionsMenuPopInSpeed));
                     optionsMenuCanvasGroup.alpha = 1;
                     startMenu.SetActive(false);
+                    break;
+                case ButtonId.MainMenuExit:
+                    audioManager.PlaySoundEffect(cancellationSoundEffect);
+                    Application.Quit();
                     break;
             }
         }
@@ -83,6 +87,10 @@ namespace THFUMO
                 return;
             }
             audioManager.PlaySoundEffect(cancellationSoundEffect);
+            if (buttonNavigator.CurrentButtonId is ButtonId.MainMenuExit && context.control.path is "/Keyboard/escape")
+            {
+                Application.Quit();
+            }
             buttonNavigator.CurrentButtonIndex = buttonNavigator.ButtonCount - 1;
         }
     }
