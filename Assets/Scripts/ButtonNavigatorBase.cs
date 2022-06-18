@@ -1,13 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace THFUMO
 {
     public abstract class ButtonNavigatorBase : MonoBehaviour
     {
-        public abstract int CurrentButtonIndex { get; set; }
+        public abstract ThButton CurrentButton { get; set; }
 
-        public abstract ButtonId CurrentButtonId { get; set; }
+        public abstract IEnumerable<ThButton> Buttons { get; }
 
-        public abstract int ButtonCount { get; }
+        public abstract void MoveUp();
+
+        public abstract void MoveDown();
+
+        public abstract void MoveLeft();
+
+        public abstract void MoveRight();
+
+        public abstract event ThButtonPositionChangedEventHandler PositionChanged;
     }
 }

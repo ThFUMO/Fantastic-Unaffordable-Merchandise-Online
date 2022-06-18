@@ -271,7 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b584f16b34e7214b8ce8020d875ad2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonId: 5
+  Id: 5
+  Position: {x: 0, y: 1}
 --- !u!1 &153983070
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +558,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b584f16b34e7214b8ce8020d875ad2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonId: 1
+  Id: 1
+  Position: {x: 0, y: 0}
 --- !u!1 &245656577
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,7 +1000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b584f16b34e7214b8ce8020d875ad2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonId: 4
+  Id: 4
+  Position: {x: 0, y: 0}
 --- !u!1 &1024358862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,7 +1245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b584f16b34e7214b8ce8020d875ad2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonId: 7
+  Id: 7
+  Position: {x: 0, y: 3}
 --- !u!1 &1262370702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b584f16b34e7214b8ce8020d875ad2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonId: 3
+  Id: 3
+  Position: {x: 0, y: 2}
 --- !u!1 &1343053362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,7 +1545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b584f16b34e7214b8ce8020d875ad2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonId: 2
+  Id: 2
+  Position: {x: 0, y: 1}
 --- !u!1 &1374245192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,6 +1635,7 @@ GameObject:
   - component: {fileID: 1408669592}
   - component: {fileID: 1408669593}
   - component: {fileID: 1408669594}
+  - component: {fileID: 1408669595}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -1701,6 +1708,7 @@ MonoBehaviour:
   audioHolder: {fileID: 595351620}
   outlineColor: {r: 0, g: 0.25, b: 1, a: 1}
   outlineWidth: 0.3
+  buttonNavigator: {fileID: 1408669595}
 --- !u!114 &1408669594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1713,7 +1721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f125de7a0aaf194faed892425e8529e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonNavigator: {fileID: 1408669593}
+  buttonNavigator: {fileID: 1408669595}
   audioManager: {fileID: 595351619}
   audioHolder: {fileID: 595351620}
   optionsMenu: {fileID: 1024358862}
@@ -1724,6 +1732,19 @@ MonoBehaviour:
   optionsMenuPopInSpeed: 50000
   startMenuFadeOutSpeed: 5
   coroutineRunner: {fileID: 1256532866}
+--- !u!114 &1408669595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408669590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7316b7070104bc44c996a4957ade7696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialButton: {fileID: 157453840}
 --- !u!1 &1547307821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,6 +1757,7 @@ GameObject:
   - component: {fileID: 1547307825}
   - component: {fileID: 1547307824}
   - component: {fileID: 1547307826}
+  - component: {fileID: 1547307827}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -1783,6 +1805,7 @@ MonoBehaviour:
   audioHolder: {fileID: 595351620}
   outlineColor: {r: 0, g: 0.25, b: 1, a: 1}
   outlineWidth: 0.3
+  buttonNavigator: {fileID: 1547307827}
 --- !u!114 &1547307825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1831,6 +1854,19 @@ MonoBehaviour:
   startMenuFadeInSpeed: 5
   startMenuCanvasGroup: {fileID: 245656579}
   coroutineRunner: {fileID: 1256532866}
+--- !u!114 &1547307827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547307821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7316b7070104bc44c996a4957ade7696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialButton: {fileID: 977512609}
 --- !u!1 &1584399096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,7 +2015,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b584f16b34e7214b8ce8020d875ad2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonId: 6
+  Id: 6
+  Position: {x: 0, y: 2}
 --- !u!1 &1817274199
 GameObject:
   m_ObjectHideFlags: 0

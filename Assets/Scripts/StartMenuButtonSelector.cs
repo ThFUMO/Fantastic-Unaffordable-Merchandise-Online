@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+using System.Linq;
 
 namespace THFUMO
 {
@@ -61,7 +61,7 @@ namespace THFUMO
             {
                 return;
             }
-            switch (buttonNavigator.CurrentButtonId)
+            switch (buttonNavigator.CurrentButton.Id)
             {
                 case ButtonId.MainMenuOptions:
                     audioManager.PlaySoundEffect(confirmationSoundEffect);
@@ -87,11 +87,11 @@ namespace THFUMO
                 return;
             }
             audioManager.PlaySoundEffect(cancellationSoundEffect);
-            if (buttonNavigator.CurrentButtonId is ButtonId.MainMenuExit && context.control.path is "/Keyboard/escape")
+            if (buttonNavigator.CurrentButton.Id is ButtonId.MainMenuExit && context.control.path is "/Keyboard/escape")
             {
                 Application.Quit();
             }
-            buttonNavigator.CurrentButtonIndex = buttonNavigator.ButtonCount - 1;
+            buttonNavigator.CurrentButton = buttonNavigator.Buttons.First(button => button.Id == ButtonId.MainMenuExit);
         }
     }
 }

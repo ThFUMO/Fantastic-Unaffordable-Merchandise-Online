@@ -5,58 +5,8 @@ using UnityEngine.InputSystem;
 
 namespace THFUMO
 {
-    public class MainMenuButtonNavigator : ButtonNavigatorBase
+    public class MainMenuButtonNavigator : MonoBehaviour
     {
-        private List<TextMeshProUGUI> childTexts = new();
-
-        private int currentButtonIndex = 0;
-
-        public override int CurrentButtonIndex
-        {
-            get => currentButtonIndex;
-            set
-            {
-                currentButtonIndex = value;
-                currentButtonIndex = Utilities.Repeat(currentButtonIndex, 0, childTexts.Count - 1);
-                UpdateHighlight();
-            }
-        }
-
-        public override ButtonId CurrentButtonId
-        {
-            get
-            {
-                ButtonIdHolder buttonIdHolder = childTexts[CurrentButtonIndex].gameObject.GetComponent<ButtonIdHolder>();
-                if (buttonIdHolder == null)
-                {
-                    Debug.LogError($"{childTexts[CurrentButtonIndex].gameObject.name} has no {nameof(ButtonIdHolder)} attached.");
-                    return ButtonId.None;
-                }
-                return buttonIdHolder.ButtonId;
-            }
-            set
-            {
-                for (int i = 0; i < childTexts.Count; i++)
-                {
-                    ButtonIdHolder buttonIdHolder = childTexts[i].gameObject.GetComponent<ButtonIdHolder>();
-                    if (buttonIdHolder != null && buttonIdHolder.ButtonId == value)
-                    {
-                        CurrentButtonIndex = i;
-                        UpdateHighlight();
-                        return;
-                    }
-                }
-                Debug.LogError($"No child button with the {nameof(ButtonId)} of {value} is found.");
-            }
-        }
-
-        public override int ButtonCount
-        {
-            get => childTexts.Count;
-        }
-
-        private bool hasPressedArrowKey = false;
-
         private AudioClip selectionSoundEffect;
 
         [SerializeField]
@@ -71,25 +21,26 @@ namespace THFUMO
         [SerializeField]
         private float outlineWidth;
 
+        [SerializeField]
+        private ButtonNavigatorBase buttonNavigator;
+
         private Controls controls;
 
         private void Start()
         {
-            foreach (Transform child in transform)
+            TextMeshProUGUI initialText = buttonNavigator.CurrentButton.GetComponent<TextMeshProUGUI>();
+            if (initialText != null)
             {
-                childTexts.Add(child.GetComponent<TextMeshProUGUI>());
-            }
-            if (childTexts.Count != 0)
-            {
-                childTexts[0].outlineColor = outlineColor;
-                childTexts[0].outlineWidth = outlineWidth;
-                childTexts[0].gameObject.Reactivate();
+                initialText.outlineColor = outlineColor;
+                initialText.outlineWidth = outlineWidth;
+                initialText.gameObject.Reactivate();
             }
             controls = new();
             controls.Enable();
             controls.UI.MoveUp.performed += MoveUp_performed;
             controls.UI.MoveDown.performed += MoveDown_performed;
             selectionSoundEffect = audioHolder.GetAsset(AssetKey.UISelectionSoundEffect);
+            buttonNavigator.PositionChanged += UpdateHighlight;
         }
 
         private void MoveUp_performed(InputAction.CallbackContext context)
@@ -98,10 +49,8 @@ namespace THFUMO
             {
                 return;
             }
-            CurrentButtonIndex--;
-            hasPressedArrowKey = true;
+            buttonNavigator.MoveUp();
             audioManager.PlaySoundEffect(selectionSoundEffect);
-            UpdateHighlight();
         }
 
         private void MoveDown_performed(InputAction.CallbackContext context)
@@ -110,32 +59,26 @@ namespace THFUMO
             {
                 return;
             }
-            CurrentButtonIndex++;
-            hasPressedArrowKey = true;
+            buttonNavigator.MoveDown();
             audioManager.PlaySoundEffect(selectionSoundEffect);
-            UpdateHighlight();
         }
 
-        private void UpdateHighlight()
+        private void UpdateHighlight(object sender, ThButtonPositionChangedEventArgs e)
         {
-            if (childTexts[CurrentButtonIndex] == null)
+            foreach (ThButton button in buttonNavigator.Buttons)
             {
-                Debug.LogError($"{childTexts[CurrentButtonIndex].gameObject.name} has no {nameof(TextMeshProUGUI)} attached.");
-            }
-            else
-            {
-                childTexts[CurrentButtonIndex].outlineColor = outlineColor;
-                foreach (TextMeshProUGUI text in childTexts)
+                TextMeshProUGUI text = button.GetComponent<TextMeshProUGUI>();
+                if (text != null)
                 {
                     text.outlineWidth = 0;
                 }
-                childTexts[CurrentButtonIndex].outlineWidth = outlineWidth;
-                foreach (TextMeshProUGUI text in childTexts)
-                {
-                    text.gameObject.Reactivate();
-                }
             }
-            hasPressedArrowKey = false;
+            TextMeshProUGUI currentButtonText = buttonNavigator.CurrentButton.GetComponent<TextMeshProUGUI>();
+            if (currentButtonText != null)
+            {
+                currentButtonText.outlineWidth = outlineWidth;
+                currentButtonText.outlineColor = outlineColor;
+            }
         }
     }
 }
