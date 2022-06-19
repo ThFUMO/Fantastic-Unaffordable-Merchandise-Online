@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace THFUMO
 {
-    public class MainMenuButtonNavigator : MonoBehaviour
+    public class MainMenuButtonHighlighter : MonoBehaviour
     {
         private AudioClip selectionSoundEffect;
 
