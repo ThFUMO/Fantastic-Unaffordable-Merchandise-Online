@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace THFUMO
@@ -17,6 +18,6 @@ namespace THFUMO
 
         public abstract void MoveRight();
 
-        public abstract event ThButtonPositionChangedEventHandler PositionChanged;
+        public abstract event EventHandler<ThButtonPositionChangedEventArgs> PositionChanged;
     }
 }

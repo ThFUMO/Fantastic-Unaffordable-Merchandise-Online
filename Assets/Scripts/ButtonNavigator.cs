@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,7 +30,7 @@ namespace THFUMO
             }
         }
 
-        public override event ThButtonPositionChangedEventHandler PositionChanged;
+        public override event EventHandler<ThButtonPositionChangedEventArgs> PositionChanged;
 
         private void OnPositionChanged()
         {
